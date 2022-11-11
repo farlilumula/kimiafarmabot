@@ -35,7 +35,8 @@ bot.command(['start', 'help'], (ctx) => {
 
     /info - untuk melihat link aplikasi kimia farma
     /fj - untuk melihat faktor jual ==> On Progress
-    /harga - untuk melihat harga obat ==> On Progress
+    /harga - untuk melihat harga obat ==> On Progress_
+    
 
 
 
