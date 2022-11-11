@@ -46,23 +46,23 @@ bot.command('info', (ctx) => {
     ctx.reply(helpMessage);
 })
 
-bot.command('barcode', (ctx) => {
-    let messageBarcode = `
+// bot.command('barcode', (ctx) => {
+//     let messageBarcode = `
 
-    Upload Foto Barcode Produk OTC 
-        -----------------------------
+//     Upload Foto Barcode Produk OTC 
+//         -----------------------------
 
-        foto barcode diberi nama 
-        kode obat-nama obat  ====> contoh : 133230-Sanmol Syr 60 Ml
+//         foto barcode diberi nama 
+//         kode obat-nama obat  ====> contoh : 133230-Sanmol Syr 60 Ml
 
-        link upload ==> https://drive.google.com/drive/folders/1sBS7bk8-6oBSgvPFHR3L5lgeiHQKRYDh?usp=sharing
+//         link upload ==> https://drive.google.com/drive/folders/1sBS7bk8-6oBSgvPFHR3L5lgeiHQKRYDh?usp=sharing
     
-    `;
+//     `;
 
-    ctx.reply(messageBarcode);
+//     ctx.reply(messageBarcode);
 
     
-})
+// })
 
 //menampilakan balasan berdasarkan text yang di ketik
 bot.hears('farli lumula', (ctx) => {
