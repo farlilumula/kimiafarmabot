@@ -34,8 +34,8 @@ bot.command(['start', 'help'], (ctx) => {
     --------------------------
 
     /info - untuk melihat link aplikasi kimia farma
-    /barcode - untuk link update barcode barang OTC
-    /fj - untuk melihat faktor jual
+    /fj - untuk melihat faktor jual ==> On Progress
+    /harga - untuk melihat harga obat ==> On Progress
     
     `;
     ctx.reply(listTag);
