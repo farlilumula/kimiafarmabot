@@ -31,11 +31,15 @@ bot.command(['start', 'help'], (ctx) => {
     let listTag = `
 
     Semangat Pagi, Pagi , Pagi
-    --------------------------
+    ------------------------------
 
     /info - untuk melihat link aplikasi kimia farma
     /fj - untuk melihat faktor jual ==> On Progress
     /harga - untuk melihat harga obat ==> On Progress
+
+
+
+    --------------------------------
     
     `;
     ctx.reply(listTag);
