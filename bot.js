@@ -98,8 +98,8 @@ bot.mention('@nasiwhite', (ctx) => {
 });
 
 
-bot.use(userRouter);
-bot.use(buyRouter);
-bot.use(keywordRouter);
+// bot.use(userRouter);
+// bot.use(buyRouter);
+// bot.use(keywordRouter);
 
 bot.launch();
