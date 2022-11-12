@@ -1,4 +1,7 @@
 const { Telegraf } = require('telegraf');
+// const { createServer } from "https";
+
+// createServer(tlsOptions, await bot.createWebhook({ domain: "https://cheerful-bee-bathing-suit.cyclic.app" })).listen(3000);
 
 const bot = new Telegraf('5733739052:AAF8WE4FYdzA6NRlZfV4lemp1Sg5hiWnw40');
 
@@ -29,18 +32,18 @@ const helpMessage = `
 
 bot.command(['start', 'help'], (ctx) => {
     let listTag = `
-
     Semangat Pagi, Pagi , Pagi
-    ------------------------------
+------------------------------
 
-    /info - untuk melihat link aplikasi kimia farma
-    /fj - untuk melihat faktor jual ==> On Progress
-    /harga - untuk melihat harga obat ==> On Progress_
+/info - untuk melihat link aplikasi kimia farma
+/fj - untuk melihat faktor jual ==> On Progress
+/harga - untuk melihat harga obat ==> On Progress_
+/setoran - optimalisasi waktu setoran kasir dgn konsultan
     
 
 
 
-    --------------------------------
+--------------------------------
     
     `;
     ctx.reply(listTag);
@@ -102,4 +105,9 @@ bot.mention('@nasiwhite', (ctx) => {
 // bot.use(buyRouter);
 // bot.use(keywordRouter);
 
-bot.launch();
+bot.launch({
+    webhook: {
+        domain : 'https://cheerful-bee-bathing-suit.cyclic.app',
+        port: 4000
+    }
+});
