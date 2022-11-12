@@ -23,7 +23,7 @@ const helpMessage = `
 
         link target pipline dan realisasi 2022
         --------------------
-        shorturl.at/alpL8
+        https://app.powerbi.com/view?r=eyJrIjoiMDc1ZjM4ZjktODg2OS00ZGU1LTkwZTYtZDNlMTI5OGUxMWQwIiwidCI6IjFjNjgxNzY2LWJhOGMtNDNhNS05MTJmLWYxMzYyOTc0OGFhNyIsImMiOjEwfQ%3D%3D
 
         `;
 
@@ -51,23 +51,36 @@ bot.command('info', (ctx) => {
     ctx.reply(helpMessage);
 })
 
-// bot.command('barcode', (ctx) => {
-//     let messageBarcode = `
+bot.command('setoran', (ctx) => {
+    let messageBarcode = `
 
-//     Upload Foto Barcode Produk OTC 
-//         -----------------------------
+    Semangat Pagi 
 
-//         foto barcode diberi nama 
-//         kode obat-nama obat  ====> contoh : 133230-Sanmol Syr 60 Ml
+Untuk Optimalisasi Setoran Kasir Di POS
+Mohon untuk dilakukan perekaman pada saat Setoran Kasir sampai dengan keluarnya kertas struk  
 
-//         link upload ==> https://drive.google.com/drive/folders/1sBS7bk8-6oBSgvPFHR3L5lgeiHQKRYDh?usp=sharing
+Jadwalnya :
+Hari  : Senin - Selasa - Sabtu dan minggu
+Waktu : dilakukan Setiap shift
+Outlet : KF 272
+
+link pengisian testing
+https://forms.gle/pvJ3xnAYdEJ3e1uz5
+
+link upload video :
+https://drive.google.com/drive/folders/148jjkQTeU0Gpgh7nLnlmV6fh2h2hpAOF?usp=sharing 
+
+penamaan video
+|outlet-tgl-shift|
+
+mohon di lakukan setiap shift .. terimakasih
     
-//     `;
+    `;
 
-//     ctx.reply(messageBarcode);
+    ctx.reply(messageBarcode);
 
     
-// })
+})
 
 //menampilakan balasan berdasarkan text yang di ketik
 bot.hears('farli lumula', (ctx) => {
