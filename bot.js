@@ -1,9 +1,23 @@
 const { Telegraf } = require('telegraf');
-// const https = require('https');
+const mongoose = require("mongoose");
+const {Schema} = mongoose;
 
+// connect to mongodb
+const dbURI =
+  "mongodb+srv://dbadmin:Db2ibmrd7@farmokologi.xel5x.mongodb.net/farmokologi?retryWrites=true&w=majority";
+mongoose
+  .connect(dbURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
 
-
+ 
 const bot = new Telegraf('5733739052:AAF8WE4FYdzA6NRlZfV4lemp1Sg5hiWnw40');
+
+bot.on('message', function (msg) {
+
+});
+
 
 const helpMessage = `
 
@@ -101,13 +115,45 @@ bot.mention('@nasiwhite', (ctx) => {
 });
 
 
-// bot.use(userRouter);
-// bot.use(buyRouter);
-// bot.use(keywordRouter);
+const materialSchema = new Schema({
+    kode_obat : String,
+    nama_obat : String,
+    satuan : String,
+    hna_ppn : Number
+})
 
-// const { createServer } = require('https');
-// // createServer(tlsOptions, await bot.createWebhook({ domain: "https://cheerful-bee-bathing-suit.cyclic.app" })).listen(8443);
+const Material = mongoose.model('Material', materialSchema)
 
+
+Material.find(function(error, data){
+    if(error) console.log(error)
+
+    materialsItems = [],
+    data.forEach(material => {
+        materialsItems.push({
+            nama_obat : material.nama_obat,
+            satuan : material.satuan,
+            hna_ppn : material.hna_ppn
+        })
+    });
+})
+
+
+bot.command('harga', ctx => {
+    let input = ctx.message.text.split(" ");
+    if(input.length !=2){
+        ctx.reply("masukan nama obat lengkap");
+        return;
+    }
+    // console.log(input[1]);
+    let inputObat = input[1];
+    data.forEach(material => {
+        if(material.nama_obat.includes(inputObat)){
+            ctx.reply("Rp "+material.hna_ppn);
+            return;
+        }
+    })
+})
 
 bot.launch({
     webhook: {
