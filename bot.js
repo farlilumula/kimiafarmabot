@@ -14,11 +14,6 @@ mongoose
  
 const bot = new Telegraf('5733739052:AAF8WE4FYdzA6NRlZfV4lemp1Sg5hiWnw40');
 
-bot.on('message', function (msg) {
-
-});
-
-
 const helpMessage = `
 
         Berikut Link Aplikasi kimia farma
@@ -129,31 +124,32 @@ Material.find(function(error, data){
     if(error) console.log(error)
 
     materialsItems = [],
-    data.forEach(material => {
-        materialsItems.push({
-            nama_obat : material.nama_obat,
-            satuan : material.satuan,
-            hna_ppn : material.hna_ppn
-        })
-    });
+    console.log(data);
+    // data.forEach(material => {
+    //     materialsItems.push({
+    //         nama_obat : material.nama_obat,
+    //         satuan : material.satuan,
+    //         hna_ppn : material.hna_ppn
+    //     })
+    // });
 })
 
 
-bot.command('harga', ctx => {
-    let input = ctx.message.text.split(" ");
-    if(input.length !=2){
-        ctx.reply("masukan nama obat lengkap");
-        return;
-    }
-    // console.log(input[1]);
-    let inputObat = input[1];
-    data.forEach(material => {
-        if(material.nama_obat.includes(inputObat)){
-            ctx.reply("Rp "+material.hna_ppn);
-            return;
-        }
-    })
-})
+// bot.command('harga', ctx => {
+//     let input = ctx.message.text.split(" ");
+//     if(input.length !=2){
+//         ctx.reply("masukan nama obat lengkap");
+//         return;
+//     }
+//     // console.log(input[1]);
+//     let inputObat = input[1];
+//     materialsItems.forEach(material => {
+//         if(material.nama_obat.includes(inputObat)){
+//             ctx.reply("Rp "+material.hna_ppn);
+//             return;
+//         }
+//     })
+// })
 
 bot.launch({
     webhook: {
