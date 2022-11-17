@@ -1,15 +1,17 @@
+// const { res, req } = require("express");
 const { Telegraf } = require('telegraf');
-const mongoose = require("mongoose");
-const {Schema} = mongoose;
+const mysql = require('mysql');
+// const mongoose = require("mongoose");
+// const {Schema} = mongoose;
 
-// connect to mongodb
-const dbURI =
-  "mongodb+srv://dbadmin:Db2ibmrd7@farmokologi.xel5x.mongodb.net/farmokologi?retryWrites=true&w=majority";
-mongoose
-  .connect(dbURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+// // connect to mongodb
+// const dbURI =
+//   "mongodb+srv://dbadmin:Db2ibmrd7@farmokologi.xel5x.mongodb.net/farmokologi?retryWrites=true&w=majority";
+// mongoose
+//   .connect(dbURI, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
 
  
 const bot = new Telegraf('5733739052:AAF8WE4FYdzA6NRlZfV4lemp1Sg5hiWnw40');
@@ -110,46 +112,107 @@ bot.mention('@nasiwhite', (ctx) => {
 });
 
 
-const materialSchema = new Schema({
-    kode_obat : String,
-    nama_obat : String,
-    satuan : String,
-    hna_ppn : Number
-})
+// const materialSchema = new Schema({
+//     kode_obat : String,
+//     nama_obat : String,
+//     satuan : String,
+//     hna_ppn : Number
+// })
 
-const Material = mongoose.model('Material', materialSchema)
+// const Material = mongoose.model('Material', materialSchema)
 
+// module.exports = Material;
 
-Material.find(function(error, data){
-    if(error) console.log(error)
+// module.exports = {
+//   index: function (req, res) {
+//     let keyword = {};
+//     if (req.query.keyword) {
+//       keyword = {
+//         $or: [
+//           { kata_kunci: { $regex: req.query.keyword, $options: "i" } },
+//           { nama_obat: { $regex: req.query.keyword, $options: "i" } },
+//           { zat_aktif: { $regex: req.query.keyword, $options: "i" } },
+//         ],
+//       };
+//     }
 
-    materialsItems = [],
-    console.log(data);
-    // data.forEach(material => {
-    //     materialsItems.push({
-    //         nama_obat : material.nama_obat,
-    //         satuan : material.satuan,
-    //         hna_ppn : material.hna_ppn
-    //     })
-    // });
-})
+//     // cara pencarian ke satu
+//     const query = Material.find(keyword)
+//       // .populate("stok")
+//       .sort({ hna_ppn: -1 })
+//       .collation({ locale: "en_US", numericOrdering: true })
+//       .limit(15);
 
+//     query.exec(function (error, materials) {
+//       if (error) console.log(error);
+
+//       data = [];
+//       materials.forEach(item => {
+//         data.push({
+//           nama_obat : item.nama_obat,
+//           harga : item.hna_ppn
+//         })
+//       })
+//     });
+//   },
+
+// }
 
 // bot.command('harga', ctx => {
-//     let input = ctx.message.text.split(" ");
-//     if(input.length !=2){
-//         ctx.reply("masukan nama obat lengkap");
-//         return;
-//     }
-//     // console.log(input[1]);
-//     let inputObat = input[1];
-//     materialsItems.forEach(material => {
-//         if(material.nama_obat.includes(inputObat)){
-//             ctx.reply("Rp "+material.hna_ppn);
-//             return;
-//         }
-//     })
+//   let daftarObat = `Daftar Harga Obat : \n`;
+
+//   Material.forEach(materials => {
+//     daftarObat += `${materials.nama_obat}. ${materials.hna_ppn}\n`;
+//   })
+//   ctx.reply(daftarObat);
 // })
+
+
+
+// mysql connect 
+const conn = mysql.createConnection ({
+    host : "localhost",
+    user : "root",
+    password : "",
+    database: "bot"
+
+})
+
+conn.connect(function(err){
+    if(err){
+        throw err;
+    }
+    console.log("connected !");
+    conn.query("Select * from item", function(err, result, fields){
+        if(err) {
+            throw err;
+        }
+        dataItems = []
+        result.forEach(item => {
+            dataItems.push({
+                kode_obat: item.kode_obat,
+                nama_obat: item.nama_obat,
+                satuan: item.satuan,
+                hna_ppn: item.hna_ppn,
+            })
+        })
+    })
+})
+
+
+bot.command('harga', ctx => {
+    let daftarHarga = `List Harga Obat HnaPpn : \n`;
+    dataItems.forEach(item => {
+        daftarHarga += `${item.nama_obat}. ${item.satuan}. ${item.hna_ppn}\n`;
+    })
+    ctx.reply(daftarHarga);
+})
+
+
+
+
+
+
 
 bot.launch({
     webhook: {
@@ -157,3 +220,5 @@ bot.launch({
         port: 3000
     }
 });
+
+
