@@ -206,17 +206,12 @@ conn.connect(function(err){
 bot.command('harga', ctx => {
     let daftarHarga = `List Harga Obat HnaPpn : \n`;
     dataItems.forEach(item => {
-        daftarHarga += `${item.nama_obat}. ${item.satuan}. ${item.hna_ppn}\n`;
+        daftarHarga += `${item.nama_obat}. || ${item.satuan}. || ${item.hna_ppn}\n`;
     })
     ctx.reply(daftarHarga);
 })
 
 
-bot.launch({
-    webhook: {
-        domain : 'https://cheerful-bee-bathing-suit.cyclic.app',
-        port: 3000
-    }
-});
+bot.launch();
 
 
