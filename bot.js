@@ -174,9 +174,12 @@ const conn = mysql.createConnection ({
     host : "localhost",
     user : "root",
     password : "",
-    database: "bot"
+    database: "bot",
+    port: "3306"
 
 })
+
+
 
 conn.connect(function(err){
     if(err){
@@ -187,7 +190,7 @@ conn.connect(function(err){
         if(err) {
             throw err;
         }
-        dataItems = []
+        dataItems = [];
         result.forEach(item => {
             dataItems.push({
                 kode_obat: item.kode_obat,
@@ -207,11 +210,6 @@ bot.command('harga', ctx => {
     })
     ctx.reply(daftarHarga);
 })
-
-
-
-
-
 
 
 bot.launch({
