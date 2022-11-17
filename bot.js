@@ -203,13 +203,37 @@ conn.connect(function(err){
 })
 
 
+// bot.command('item', ctx => {
+//     let daftarHarga = `List Harga Obat HnaPpn : \n \n`;
+
+//     dataItems.forEach(item => {
+//         daftarHarga += `${item.nama_obat}. || ${item.satuan}. || ${item.hna_ppn}\n`;
+//     })
+//     ctx.reply(daftarHarga);
+// })
+
+
 bot.command('harga', ctx => {
-    let daftarHarga = `List Harga Obat HnaPpn : \n`;
-    dataItems.forEach(item => {
-        daftarHarga += `${item.nama_obat}. || ${item.satuan}. || ${item.hna_ppn}\n`;
-    })
-    ctx.reply(daftarHarga);
+    let input = ctx.message.text.split(" ");
+    if(input.length != 2) {
+        ctx.reply("harap ketikan nama obat yang di cari");
+        return;
+    }
+    console.log(input[1]);
+    let inputObat = input[1];
+    // dataItems.forEach(item => {
+    //     if(item.nama_obat.includes(inputObat)){
+    //         let hna_ppn = item.hna_ppn.toLocalesString(
+    //             undefined, {minimumFractionDigits: 2}
+    //         )
+    //         ctx.reply("Rp "+item.satuan);
+    //         return;
+    //     }
+    // })
 })
+
+
+
 
 
 bot.launch();
