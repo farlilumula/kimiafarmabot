@@ -1,20 +1,21 @@
 const { res, req } = require("express");
 const { Telegraf } = require('telegraf');
-// const mysql = require('mysql');
 const mongoose = require("mongoose");
 const { Int32 } = require('mongodb');
 const {Schema} = mongoose;
+require('dotenv').config();
 
 // Connect to MongoDB
-const dbURI = "mongodb+srv://dbadmin:Db2ibmrd7@farmokologi.xel5x.mongodb.net/farmokologi?retryWrites=true&w=majority";
+const dbURI = process.env.MONGODB_URI;
+
 mongoose.connect(dbURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-});
+})
 
 //template untuk
 // Inisialisasi bot
-const bot = new Telegraf('5733739052:AAF8WE4FYdzA6NRlZfV4lemp1Sg5hiWnw40');
+const bot = new Telegraf(process.env.BOT_TOKEN);
 
 // Schema dan Model
 const stockSchema = new mongoose.Schema({
