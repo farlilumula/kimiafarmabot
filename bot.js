@@ -71,7 +71,14 @@ bot.command('stock', async (ctx) => {
     }
 });
 
-// Jalankan bot
-bot.launch().then(() => {
-    console.log('Bot aktif...');
-});
+// Handle polling (dev) / webhook (production)
+if (process.env.VERCEL_ENV) {
+    module.exports = bot.webhookCallback('bot');
+} else {
+    bot.launch();
+}
+
+// // Jalankan bot
+// bot.launch().then(() => {
+//     console.log('Bot aktif...');
+// });
