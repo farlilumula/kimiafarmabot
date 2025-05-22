@@ -71,16 +71,11 @@ bot.command('stock', async (ctx) => {
     }
 });
 
-// Jalankan hanya satu mode
-if (process.env.RAILWAY_ENVIRONMENT) {
-    // Production: Webhook
-    const app = require('express')();
-    app.use(bot.webhookCallback('/bot'));
-    app.listen(process.env.PORT || 3000);
+// // Handle polling (dev) / webhook (production)
+if (process.env.VERCEL_ENV) {
+    module.exports = bot.webhookCallback('bot');
 } else {
-    // Development: Polling
     bot.launch();
-    process.once('SIGINT', () => bot.stop('SIGINT'));
 }
 
 // // Jalankan bot
